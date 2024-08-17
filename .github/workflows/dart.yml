@@ -1,0 +1,40 @@
+name: Build Flutter Web
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '2.8.1'  # Using Flutter 2.8.1, compatible with Dart SDK >= 2.15.1 < 3.0.0
+
+    - name: Install dependencies
+      run: flutter pub get
+
+    - name: Run Flutter analyze
+      run: flutter analyze
+
+    - name: Run Flutter tests
+      run: flutter test
+
+    - name: Build Flutter web
+      run: flutter build web --release
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: flutter-web-build
+        path: build/web
