@@ -24,10 +24,10 @@ jobs:
     - name: Install dependencies
       run: flutter pub get
 
-    - name: Run Flutter analyze
+    # - name: Run Flutter analyze
       # run: flutter analyze
 
-    - name: Run Flutter tests
+    # - name: Run Flutter tests
       # run: flutter test
 
     - name: Build Flutter web
